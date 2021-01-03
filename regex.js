@@ -78,3 +78,24 @@ regEx = /\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})/g;
 // (123) 456-7890
 // +1 123 456 7890
 regEx = /(?:(\+1)[ -]?)\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})/g;
+
+// This function will take a string and turn it all to lowercase before splitting the str into individual words
+// The loop will check if the word ends with a vowel and the following word begins with one
+// If true at any iteration return true
+function vowelLinks(str) {
+	let strArr = str.toLowerCase().split(' ');
+	let isTrueArr = [];
+	for (let i = 0; i < strArr.length - 1; i++) {
+		if (/(a|e|i|o|u)$/g.test(strArr[i]) && /^(a|e|i|o|u)/g.test(strArr[i + 1])) {
+			isTrueArr.push(true)
+		} else {
+			isTrueArr.push(false)
+		}
+	}
+	return isTrueArr.includes(true);
+}
+// This function can be reduced to the simple regex
+const vowelLinks = str => /[aoiou] [aeiou]/i.test(str)
+
+// This regex will validate a pin to make sure it only includes 4 or 6 digits
+const pinValidatorRegExp = new RegExp(/^(\d{4}|\d{6})$/);
